@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Life Dashboard</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <!-- Storage unavailability warning banner (hidden by default) -->
+  <div id="storage-warning" role="alert" aria-live="polite" hidden>
+    ⚠️ Local storage is unavailable. Your data will not be saved during this session.
+  </div>
+
+  <!-- App header: title + theme toggle -->
+  <header class="app-header">
+    <h1 class="app-title">Life Dashboard</h1>
+    <button
+      id="theme-toggle"
+      class="theme-toggle-btn"
+      aria-label="Switch to dark mode"
+      type="button"
+    >🌙</button>
+  </header>
+
+  <!-- Settings row: name personalization + pomodoro duration -->
+  <div class="settings-row">
+
+    <!-- Name personalization -->
+    <div class="settings-group">
+      <label for="name-input">Your name</label>
+      <input
+        type="text"
+        id="name-input"
+        name="name"
+        maxlength="50"
+        placeholder="Enter your name…"
+        aria-label="Your display name"
+      />
+      <button id="name-save" type="button" aria-label="Save name">Save</button>
+    </div>
+
+    <!-- Pomodoro duration -->
+    <div class="settings-group">
+      <label for="duration-input">Focus duration (min)</label>
+      <input
+        type="number"
+        id="duration-input"
+        name="duration"
+        min="1"
+        max="120"
+        value="25"
+        aria-label="Pomodoro duration in minutes"
+      />
+      <button id="duration-save" type="button" aria-label="Save focus duration">Save</button>
+      <span id="duration-error" class="inline-error" aria-live="polite" hidden></span>
+    </div>
+
+  </div>
+
+  <!-- Main dashboard grid: four widget cards -->
+  <main class="dashboard-grid">
+
+    <!-- Greeting Widget -->
+    <section id="greeting-widget" class="widget-card" aria-label="Greeting">
+      <p id="greeting-time" class="greeting-time"></p>
+      <p id="greeting-date" class="greeting-date"></p>
+      <p id="greeting-message" class="greeting-message"></p>
+    </section>
+
+    <!-- Focus Timer Widget -->
+    <section id="focus-timer" class="widget-card" aria-label="Focus Timer">
+      <h2 class="widget-title">Focus Timer</h2>
+      <div
+        id="timer-display"
+        class="timer-display"
+        role="timer"
+        aria-live="polite"
+        aria-label="Timer countdown"
+      >25:00</div>
+      <div id="timer-completion" class="timer-completion" aria-live="assertive" hidden>
+        ✅ Time's up! Great work!
+      </div>
+      <div class="timer-controls">
+        <button id="timer-start" type="button" aria-label="Start timer">Start</button>
+        <button id="timer-stop"  type="button" aria-label="Stop timer">Stop</button>
+        <button id="timer-reset" type="button" aria-label="Reset timer">Reset</button>
+      </div>
+    </section>
+
+    <!-- Task List Widget -->
+    <section id="task-list" class="widget-card" aria-label="To-Do List">
+      <h2 class="widget-title">To-Do List</h2>
+      <form id="task-form" aria-label="Add new task">
+        <label for="task-input" class="sr-only">New task description</label>
+        <input
+          type="text"
+          id="task-input"
+          name="task"
+          maxlength="200"
+          placeholder="Add a new task…"
+          aria-label="New task description"
+        />
+        <button type="submit" aria-label="Add task">Add</button>
+        <span id="task-input-error" class="inline-error" aria-live="polite" hidden></span>
+      </form>
+      <ul id="task-list-items" class="task-list-items" aria-label="Task list"></ul>
+    </section>
+
+    <!-- Quick Links Widget -->
+    <section id="quick-links" class="widget-card" aria-label="Quick Links">
+      <h2 class="widget-title">Quick Links</h2>
+      <form id="link-form" aria-label="Add new quick link">
+        <label for="link-label-input">Label</label>
+        <input
+          type="text"
+          id="link-label-input"
+          name="link-label"
+          maxlength="50"
+          placeholder="Link label…"
+          aria-label="Link label"
+        />
+        <label for="link-url-input">URL</label>
+        <input
+          type="text"
+          id="link-url-input"
+          name="link-url"
+          maxlength="2048"
+          placeholder="https://…"
+          aria-label="Link URL"
+        />
+        <button type="submit" id="link-add-btn" aria-label="Add quick link">Add</button>
+        <span id="link-form-error" class="inline-error" aria-live="polite" hidden></span>
+        <span id="link-max-reached" class="inline-error" aria-live="polite" hidden>
+          Maximum of 20 links reached.
+        </span>
+      </form>
+      <ul id="quick-links-items" class="quick-links-items" aria-label="Quick links list"></ul>
+    </section>
+
+  </main>
+
+  <script src="js/app.js" defer></script>
+</body>
+</html>
